@@ -6,20 +6,24 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:49:35 by ealgar-c          #+#    #+#             */
-/*   Updated: 2024/12/22 12:25:44 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:00:58 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+
+// EXTERNAL LIBS
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/mman.h>
 
+// CONSTS
 #define ALLOCS_NB 100
 #define TINY_SIZE 256
 #define SMALL_SIZE 4096
 
+// STRUCTS
 typedef struct s_zone_block{
 
 	size_t	block_size;
@@ -42,4 +46,6 @@ typedef struct s_malloc_utils{
 
 }	t_malloc_utils;
 
+
+// GLOBAL VARS
 extern t_malloc_utils malloc_utils;

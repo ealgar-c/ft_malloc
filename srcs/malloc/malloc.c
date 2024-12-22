@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:34:49 by ealgar-c          #+#    #+#             */
-/*   Updated: 2024/12/22 11:54:43 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2024/12/22 12:51:29 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 t_malloc_utils malloc_utils = {-1, NULL};
 
+/**
+ * @brief Allocates memory for a desired size
+ * 
+ * @param size size of the requested memory slot
+ * @return void*, NULL if something fails, else, the beggining of the memory slot
+ */
 void	*malloc(size_t size) {
 	size_t total_zone_size = get_zone_size(&malloc_utils, size);
 
