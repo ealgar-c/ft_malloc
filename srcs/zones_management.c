@@ -6,11 +6,11 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:05:37 by ealgar-c          #+#    #+#             */
-/*   Updated: 2024/12/22 12:56:08 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/01/26 21:16:03 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ft_malloc.h"
+#include "../include/ft_malloc.h"
 
 
 /**
@@ -70,7 +70,6 @@ t_alloc_zone *create_new_allocating_zone(size_t total_zone_size) {
 	return (new_zone);
 }
 
-
 /**
  * @brief calculates the size already taken in a zone
  * 
@@ -90,4 +89,46 @@ size_t get_already_taken_size(t_alloc_zone *zone) {
 		}
 	}
 	return (acum_size);
+}
+
+/**
+ * @brief finds the zone where the @param ptr pointer is located
+ * 
+ * @param ptr the pointer to find
+ * @return t_alloc_zone* the zone where the pointer is located
+ */
+t_alloc_zone	*find_ptr_zone(void *ptr) {
+	t_alloc_zone	*tmp = malloc_utils.a_zones;
+	t_zone_block	*block_ptr;
+	
+	while (tmp) {
+		block_ptr = tmp->zone_blocks;
+		while (block_ptr) {
+			if ((void *)block_ptr + sizeof(t_zone_block) == ptr)
+				return (tmp);
+			block_ptr = block_ptr->next;
+		}
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+void	remove_zone(t_alloc_zone *zone) {
+	size_t			size = (((SMALL_SIZE + sizeof(t_zone_block)) * (ALLOCS_NB + 1)) / malloc_utils.pages_size) * malloc_utils.pages_size;
+	t_alloc_zone	*prev_ptr = NULL;
+	t_alloc_zone	*tmp = malloc_utils.a_zones;
+
+	while (tmp && tmp != zone){
+		prev_ptr = tmp;
+		tmp = tmp->next;
+	}
+	
+	if (prev_ptr || tmp->next || zone->zone_size < size) {
+		if (!prev_ptr)
+			malloc_utils.a_zones = tmp->next;
+		else
+			prev_ptr->next = tmp->next;
+		munmap(zone, zone->zone_size);
+	}
+	
 }

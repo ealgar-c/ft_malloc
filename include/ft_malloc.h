@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:49:35 by ealgar-c          #+#    #+#             */
-/*   Updated: 2024/12/22 13:00:58 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/01/26 21:35:45 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,21 @@ typedef struct s_malloc_utils{
 
 // GLOBAL VARS
 extern t_malloc_utils malloc_utils;
+
+// USABLE FUNCS
+void	*malloc(size_t size);
+void	free(void *ptr);
+void		*realloc(void *ptr, size_t size);
+
+// functions declaration
+size_t			get_alloc_size(size_t expected_alloc_size);
+size_t			get_zone_size(size_t req_alloc_size);
+t_alloc_zone	*create_new_allocating_zone(size_t total_zone_size);
+size_t			get_already_taken_size(t_alloc_zone *zone);
+t_alloc_zone	*find_ptr_zone(void *ptr);
+
+t_zone_block	*create_new_block(void	*starting_addr, size_t block_size, void *next);
+t_zone_block	*create_and_add_new_block(t_alloc_zone *zone, size_t block_size);
+void			*new_block_in_zone(t_alloc_zone *zone, size_t requested_size);
+void			remove_block(t_alloc_zone *block_zone, void	*block_ptr);
+t_zone_block	*find_block_in_zone(t_alloc_zone *zone, void *ptr);
