@@ -6,13 +6,13 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 21:19:49 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/01/26 21:34:57 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/02/15 22:43:18 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_malloc.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+static void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t		cont;
 	char		*ptr_dest;
