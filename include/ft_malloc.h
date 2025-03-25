@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:49:35 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/02/15 22:43:04 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/03/23 14:35:06 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ size_t			get_zone_size(size_t req_alloc_size);
 t_alloc_zone	*create_new_allocating_zone(size_t total_zone_size);
 size_t			get_already_taken_size(t_alloc_zone *zone);
 t_alloc_zone	*find_ptr_zone(void *ptr);
+void			remove_zone(t_alloc_zone *zone);
 
 t_zone_block	*create_new_block(void	*starting_addr, size_t block_size, void *next);
 t_zone_block	*create_and_add_new_block(t_alloc_zone *zone, size_t block_size);

@@ -6,7 +6,7 @@
 #    By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/16 10:53:35 by lmartin           #+#    #+#              #
-#    Updated: 2025/01/06 00:10:40 by ealgar-c         ###   ########.fr        #
+#    Updated: 2025/03/23 14:35:37 by ealgar-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,11 @@ SUB_DIR_OBJS	=	$(SUB_DIRS:%=$(DIR_OBJS)%)
 SRCS			=	malloc.c \
 					zones_management.c \
 					blocks_management.c \
+					show_alloc_mem.c \
+					print_utils.c \
+					realloc.c \
+					free.c
+					
 
 # COMPILED_SOURCES #
 
