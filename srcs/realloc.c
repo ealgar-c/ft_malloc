@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 21:19:49 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/02/15 22:43:18 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:52:03 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ static void	*ft_memcpy(void *dst, const void *src, size_t n)
 }
 
 void		*realloc(void *ptr, size_t size) {
+	printf("RECIBIDO -> %p\n", ptr);
 	t_alloc_zone *zone = find_ptr_zone(ptr);
+	printf("alo\n");
 	if (!zone)
 		return (NULL);
 	t_zone_block *block = find_block_in_zone(zone, ptr);

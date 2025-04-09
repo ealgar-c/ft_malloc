@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 22:23:31 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/02/15 22:43:12 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:18:38 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static size_t	print_zone(t_alloc_zone *actual_zone) {
 	return (zone_space);
 }
 
-void		show_alloc_mem(void) {
+void	show_alloc_mem(void) {
 	size_t			total = 0;
 	t_alloc_zone	*tmp = malloc_utils.a_zones;
 

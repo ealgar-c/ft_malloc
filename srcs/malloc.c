@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:34:49 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/01/26 20:39:28 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:59:16 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	*malloc(size_t size) {
 		last_zone_ptr->next = create_new_allocating_zone(total_zone_size);
 		ret_alloc_block = new_block_in_zone(last_zone_ptr->next, size);
 	}
-
+	printf("ALLOCATED -> %p\n", ret_alloc_block);
 	return (ret_alloc_block);
 }
