@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:05:37 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/04/09 20:49:30 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:02:14 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	get_alloc_size(size_t expected_alloc_size) {
 size_t	get_zone_size(size_t req_alloc_size) {
 	size_t	allocation_size = get_alloc_size(sizeof(t_alloc_zone) + req_alloc_size);
 	if (malloc_utils.pages_size == -1)
-		malloc_utils.pages_size = getpagesize();
+		malloc_utils.pages_size = sysconf(_SC_PAGESIZE);
 	size_t new_zone_size;
 
 	if (sizeof(t_alloc_zone) + req_alloc_size <= SMALL_SIZE) {
