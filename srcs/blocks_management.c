@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:55:04 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/01/26 21:26:30 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:38:39 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 t_zone_block	*create_new_block(void	*starting_addr, size_t block_size, void *next) {
 	t_zone_block	*block = starting_addr;
 
+	if (!starting_addr) {
+		return (NULL);
+	}
 	block->block_size = block_size;
 	block->next = next;
 	return (block);
@@ -38,11 +41,15 @@ t_zone_block	*create_new_block(void	*starting_addr, size_t block_size, void *nex
 t_zone_block	*create_and_add_new_block(t_alloc_zone *zone, size_t block_size) {
 	t_zone_block		*block;
 
-	if (((void *)zone + sizeof(t_alloc_zone)) < zone->zone_blocks && (size_t)(zone->zone_blocks - ((void *)zone + sizeof(t_alloc_zone))) >= block_size)
+	char *zone_start = (char *)zone + sizeof(t_alloc_zone);
+	char *first_block = (char *)zone->zone_blocks;
+
+	if (zone_start < first_block &&
+    		(size_t)(first_block - zone_start) >= block_size)
 	{
-		block = create_new_block((void *)zone + sizeof(t_alloc_zone), block_size, zone->zone_blocks);
-		zone->zone_blocks = block;
-		return (block);
+    		block = create_new_block(zone_start, block_size, zone->zone_blocks);
+    		zone->zone_blocks = block;
+    		return block;
 	}
 	block = zone->zone_blocks;
 	while (block->next)

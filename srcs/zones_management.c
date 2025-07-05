@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 11:05:37 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/05/24 12:02:14 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:24:29 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ t_alloc_zone *create_new_allocating_zone(size_t total_zone_size) {
 	t_alloc_zone	*new_zone;
 
 	new_zone = mmap(NULL, total_zone_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+	if (new_zone == MAP_FAILED) {
+		return NULL;
+	}
 	new_zone->zone_size = total_zone_size;
 	new_zone->zone_blocks = NULL;
 	new_zone->next = NULL;
@@ -114,7 +117,6 @@ t_alloc_zone	*find_ptr_zone(void *ptr) {
 }
 
 void	remove_zone(t_alloc_zone *zone) {
-	size_t			size = (((SMALL_SIZE + sizeof(t_zone_block)) * (ALLOCS_NB + 1)) / malloc_utils.pages_size) * malloc_utils.pages_size;
 	t_alloc_zone	*prev_ptr = NULL;
 	t_alloc_zone	*tmp = malloc_utils.a_zones;
 
@@ -122,8 +124,7 @@ void	remove_zone(t_alloc_zone *zone) {
 		prev_ptr = tmp;
 		tmp = tmp->next;
 	}
-	
-	if (prev_ptr || tmp->next || zone->zone_size < size) {
+	if (tmp) {
 		if (!prev_ptr)
 			malloc_utils.a_zones = tmp->next;
 		else
