@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   ft_printdec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 22:15:57 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/02/15 22:36:11 by ealgar-c         ###   ########.fr       */
+/*   Created: 2023/04/30 20:47:09 by palucena          #+#    #+#             */
+/*   Updated: 2024/01/10 13:43:19 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_malloc.h"
-
-static int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-	return (i);
-}
+#include "../../libft.h"
 
 void	ft_putnbr(int nb)
 {
@@ -41,7 +22,7 @@ void	ft_putnbr(int nb)
 	}
 	if (nb < 0)
 	{
-		write (1, "-", 1);
+		ft_putchar('-');
 		nb *= -1;
 	}
 	if (nb >= 0 && nb <= 9)
@@ -53,14 +34,27 @@ void	ft_putnbr(int nb)
 	}
 }
 
-int	ft_printhexa(unsigned long long n)
+static int	ft_dcount(long int nb)
 {
-	unsigned long long	count;
+	int	i;
 
-	count = 0;
-	if (n >= 16)
-		count += ft_printhexa(n / 16);
-	ft_putchar("0123456789ABCDEF"[n % 16]);
-	count++;
-	return (count);
+	i = 0;
+	while (nb >= 10)
+	{
+		nb /= 10;
+		i++;
+	}
+	return (i + 1);
+}
+
+int	ft_printdec(int nb)
+{
+	long int	c;
+
+	c = 0;
+	ft_putnbr(nb);
+	if (nb >= 0)
+		return (ft_dcount(nb));
+	c = (long int)nb * (-1);
+	return (ft_dcount(c) + 1);
 }

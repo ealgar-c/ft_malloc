@@ -6,7 +6,7 @@
 /*   By: ealgar-c <ealgar-c@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 18:49:35 by ealgar-c          #+#    #+#             */
-/*   Updated: 2025/03/23 14:35:06 by ealgar-c         ###   ########.fr       */
+/*   Updated: 2025/07/05 15:02:06 by ealgar-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 // EXTERNAL LIBS
 #include <unistd.h>
-#include <stdio.h>
 #include <sys/mman.h>
+
+#include "./libft/libft.h"
 
 // CONSTS
 #define ALLOCS_NB 100
@@ -69,7 +70,3 @@ t_zone_block	*create_and_add_new_block(t_alloc_zone *zone, size_t block_size);
 void			*new_block_in_zone(t_alloc_zone *zone, size_t requested_size);
 void			remove_block(t_alloc_zone *block_zone, void	*block_ptr);
 t_zone_block	*find_block_in_zone(t_alloc_zone *zone, void *ptr);
-
-int				ft_putstr(char *str);
-void			ft_putnbr(int nb);
-int				ft_printhexa(unsigned long long n);
